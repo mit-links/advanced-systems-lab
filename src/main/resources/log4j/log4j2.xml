@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn" name="asl-linggit" packages="" shutdownHook="disable">
+    <!-- status refers to the log level of log4j itself-->
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout
+                    pattern="%d{ISO8601} %p %c{1}:%L %t - %m%n %ex{20}"/>
+            <!--date, log level, class&line, thread name - message, newline, any exceptions, max 20 lines -->
+        </Console>
+        <RandomAccessFile name="file" fileName="logs/mw.log" append="false" immediateFlush="false">
+            <PatternLayout
+                    pattern="%d{ISO8601} %p %c{1}:%L %t - %m%n %ex{full}"/>
+            <!--date, log level, class&line, thread name - message, newline, any exceptions -->
+        </RandomAccessFile>
+        <RandomAccessFile name="msg_log" fileName="logs/raw.log" append="false" immediateFlush="false">
+
+        </RandomAccessFile>
+        <RandomAccessFile name="agg_log" fileName="logs/aggregated.log" append="false" immediateFlush="false">
+
+        </RandomAccessFile>
+
+
+    </Appenders>
+    <Loggers>
+        <Logger name="msg_log" level="all"
+                additivity="false"> <!-- additivity flag prevents from printing to root logger as well-->
+            <AppenderRef ref="msg_log" level="all"/>
+        </Logger>
+        <Logger name="agg_log" level="all"
+                additivity="false"> <!-- additivity flag prevents from printing to root logger as well-->
+            <AppenderRef ref="agg_log" level="all"/>
+        </Logger>
+        <Root level="all">
+            <AppenderRef ref="file" level="info"/>
+            <AppenderRef ref="console" level="info"/>
+        </Root>
+    </Loggers>
+</Configuration>

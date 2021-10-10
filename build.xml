@@ -1,0 +1,51 @@
+<project name="asl-fall17-project" default="jar" basedir=".">
+    <description>
+        ANT Build File for ASL Fall 2017 Project
+    </description>
+
+    <property name="nethzid" value="linggit"/>
+
+    <property name="src" location="src/main/java"/>
+    <property name="build" location="build"/>
+    <property name="dist" location="dist"/>
+    <property name="log4j" location="src/main/resources/log4j"/>
+    <property name="libs" location="src/main/resources/libs"/>
+
+    <target name="init">
+        <tstamp/>
+        <!-- delet old dirs-->
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build}"/>
+
+    </target>
+
+    <target name="compile" depends="init" description="compile source">
+        <!-- Compile the java code from ${src} into ${build} -->
+        <javac srcdir="${src}" destdir="${build}" includeantruntime="false">
+            <classpath>
+                <pathelement path="${libs}/log4j-api-2.9.1.jar"/>
+                <pathelement path="${libs}/log4j-core-2.9.1.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile" description="generate dist">
+        <mkdir dir="${dist}"/>
+        <jar jarfile="${dist}/middleware-${nethzid}.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="src.main.java.ch.ethz.asltest.RunMW"/>
+            </manifest>
+            <fileset dir="${log4j}"/>
+            <fileset dir="${src}" includes="**/*.java"/>
+        </jar>
+        <delete dir="${build}"/>
+    </target>
+
+    <target name="clean" description="clean up">
+        <delete dir="${build}"/>
+        <delete dir="${dist}"/>
+    </target>
+</project>
+
