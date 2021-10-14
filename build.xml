@@ -3,8 +3,6 @@
         ANT Build File for ASL Fall 2017 Project
     </description>
 
-    <property name="nethzid" value="linggit"/>
-
     <property name="src" location="src/main/java"/>
     <property name="build" location="build"/>
     <property name="dist" location="dist"/>
@@ -33,7 +31,7 @@
 
     <target name="jar" depends="compile" description="generate dist">
         <mkdir dir="${dist}"/>
-        <jar jarfile="${dist}/middleware-${nethzid}.jar" basedir="${build}">
+        <jar jarfile="${dist}/middleware.jar" basedir="${build}">
             <manifest>
                 <attribute name="Main-Class" value="src.main.java.ch.ethz.asltest.RunMW"/>
             </manifest>
