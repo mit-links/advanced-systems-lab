@@ -6,11 +6,10 @@ The goal of this course was to develop a middleware between load generating Memt
 - Linux
 - Java 8+
 - Ant
-- [Memecached](https://github.com/memcached/memcached/wiki/Install)
+- [Memcached](https://github.com/memcached/memcached/wiki/Install)
+- [Memtier](https://github.com/RedisLabs/memtier_benchmark)
 
 # Get started
-Compile/run middleware (and adjust parameters): `run_mw.sh`
-
-or
-
-Compile with ant:  `ant -f build.xml`
+- Run server: `run_server.sh`
+- Compile and run middleware: `run_mw.sh`
+- Run client (script requires parameters): `run_client.sh`
